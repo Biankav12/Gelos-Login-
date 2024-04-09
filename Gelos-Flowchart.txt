@@ -1,0 +1,88 @@
+Start
+
+Initialize username as empty string
+
+While true
+    Print "Welcome user to the Gelos Enterprise"
+    Print "What would you like to do:"
+
+    If username is empty
+        Print "A. Login"
+        Print "B. Signup"
+        Print "C. Exit"
+
+        Get choice from user input and convert to lowercase
+
+        If choice is 'a' for Login
+            Ask for "Enter your username:" and store in login_user
+            Ask for "Enter your password:" and store in login_pass
+
+            Open 'accounts.txt' in read mode
+                For each account in accounts file
+                    If account starts with login_user and ends with login_pass
+                        Set username to login_user
+                End If
+                If username is empty
+                    Print "Login Unsuccessful"
+                End If
+            End For
+        End If
+
+        If choice is 'b' for Signup
+            Ask for "Enter your username:" and store in login_user
+            Ask "Would you like to auto generate a password (Yes - Y, No - N)?" and store in auto_generate
+
+            If auto_generate is 'n'
+                Ask for "Enter your password:" and store in password
+            Else if auto_generate is 'y'
+                Ask for "Choose your options [A - Numbers, B - Uppercase, C - Lowercase, D - Symbols]:" and store in chosen_characters
+
+                Define character_set with numbers, uppercase, lowercase, symbols
+                Initialize selected_chars as empty string
+
+                For each option in character_set
+                    If option is in chosen_characters
+                        Append character_set option to selected_chars
+                    End If
+                End For
+
+                Ask "How long would you like the length of your password to be?" and store in length
+                Generate password of length with characters from selected_chars
+
+                Print "Above is your password!" with password
+            End If
+
+            Open 'accounts.txt' in append mode
+                Concatenate login_user and password with space, prepend newline, and write to file
+            End Open
+        End If
+
+        If choice is 'c' for Exit
+            Print countdown from 3 to 1
+            Exit program
+        End If
+    Else
+        Print "A. View Users"
+        Print "B. Logout"
+
+        Get choice from user input and convert to lowercase
+
+        If choice is 'a' for View Users
+            If username is "Admin"
+                Open 'accounts.txt' in read mode
+                    For each account in accounts file
+                        Print account
+                    End For
+                End Open
+            Else
+                Print "Sorry only Admins can do that"
+            End If
+        End If
+
+        If choice is 'b' for Logout
+            Set username to empty
+        End If
+    End If
+End While
+
+End
